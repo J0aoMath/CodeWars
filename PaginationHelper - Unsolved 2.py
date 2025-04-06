@@ -1,7 +1,6 @@
 # TODO: complete this class
 
 class PaginationHelper:
-    
     # The constructor takes in an array of items and an integer indicating
     # how many items fit within a single page
     def __init__(self, collection, items_per_page):
@@ -43,16 +42,19 @@ class PaginationHelper:
     def page_index(self, item_index):
         if item_index < 0:
             return -1
-        i_items = 0
         i_pages = 0
-        i_item = 0
-        for z in range(0, item_index):
-            i_items += 1
-            if i_items % self.items_per_page == 1 and i_items > 1:
-                i_pages += 1
-                i_item = -1
-            i_item += 1
+        i_item = -1
+        if self.items_per_page != 1:
+            for z in range(0, item_index+1):
+                if z % self.items_per_page == 1 and z > 1:
+                    i_pages += 1
+                    i_item = -1
+                i_item += 1
+        else:
+            for z in range(0, item_index):
+                    i_pages += 1
         try:
-            return i_pages
+            if self.book_[i_pages][i_item] == self.book_[i_pages][i_item]:
+                return i_pages
         except:
             return -1
