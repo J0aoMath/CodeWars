@@ -1,6 +1,47 @@
 def transform_list(answer):
-    
-        print(answer)
+        #[40, 4, 1000000, 3, 100, 80, 6, 1000, 1, 100, 50, 6]
+        print(f'---------------------- \n essa é a lista: {answer}')
+        others = []
+        for f,value in enumerate(answer):
+                if len(str(value)) == 2:
+                        try:
+                                if answer[f+1] < value:
+                                        answer[f] = value + answer[f+1]
+                                        answer.pop(f+1)
+                        except:
+                                pass
+        print(f'nova lista: {answer}')
+        for f,value in enumerate(answer[::-1]):
+                z = len(answer)-f
+                if value >= 100:
+                        try:
+                                if not answer[z-1] < answer[z-2]:
+                                        print(f'answer:{answer} value: {value}')
+                                        answer[z-1] = value * answer[z-2]
+                                        print(f'números sendo multiplicados: {value} e {answer[z-2]}')
+                                        answer.pop(z-2)
+                                        print(f'esse é o answer[z-2] {answer[z-2]}')
+                                elif len(str(answer[z-2])) == 3:
+                                        if value == 100:
+                                                break
+                                        print(f'answer:{answer} value: {value}')
+                                        print(f'z-3,z-2 e z-1: {answer[z-3]}x{answer[z-2]}+{answer[z-1]}')
+                                        answer[z-2] = answer[z-3] * answer[z-2] + answer[z-1]
+                                        answer.pop(z-1)
+                                        answer.pop(z-3)
+                                        answer[z-2] = answer[z-3] * answer[z-2]
+                                        answer.pop(z-3)
+                        except:
+                                try:
+                                        answer[z] = value * answer[z-2]
+                                        answer.pop(z-2)
+                                        print(f'tentou {value} * {answer[z-2]}')
+                                except:
+                                        pass
+        
+        print(f'essa é a resposta: {answer}')
+
+        
 
 def parse_int(string):
     string = string.replace('-', ' ')
@@ -26,8 +67,6 @@ def parse_int(string):
     return transform_list(answer_)
 
 parse_int('one')
-parse_int('eleven')
-parse_int('twenty'),
 parse_int('two hundred forty-six')
 parse_int('forty-four million three hundred eighty-six thousand one hundred fifty-six')
 
